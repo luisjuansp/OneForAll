@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
 // Index route
-app.get('/test', function (req, res) {
+app.get('/', function (req, res) {
     res.send('Facebook API twerks')
 })
 
