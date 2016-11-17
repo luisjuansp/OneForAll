@@ -1,0 +1,28 @@
+{
+  "name": "oneforall",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test.js",
+  "dependencies": {
+    "randomstring": "^1.1.5",
+    "request": "^2.78.0",
+    "body-parser": "^1.15.2",
+    "webshot": "^0.18.0",
+    "slackbots": "^0.5.3",
+    "express": "^4.14.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luisjuansp/OneForAll.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luisjuansp/OneForAll/issues"
+  },
+  "homepage": "https://github.com/luisjuansp/OneForAll#readme"
+}
