@@ -1,11 +1,11 @@
 var exports = {};
 
-exports.recieveMessageAPI(data){
-	
+exports.recieveMessageAPI = function (data) {
+
 }
 
-exports.recieveMessage(data){
-	
+exports.recieveMessage = function (data){
+
 }
 
 module.exports = exports;
