@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const request = require('request')
 const app = express()
 
-const token = "EAAEHfRLRjpIBAANLcY1imobJfHaqw18YkvcZAkwFrMVQ4fFxGYEpEGQZAfyqCeWXineRG9aDyGT3zl4zvubDZAdhmg8L4AHXM05EaXKme2oFpehvW06DUhKknUpHhJimMTxEtjj0beFnv13j7itqHKknalOWLFJsCi0e1q0UwZDZDD"
+const token = "EAAS6Ppy5MfcBANOiIm3pfBqZAWXxcnUGxEZB8kB7G5NgfMIo1sZBZCxwYNhZBULmzQLg3p0cz1kHZBS5484YJcz5WaWrUJD7gQ9yq2jY1QiXZBSTl3dfVqsjK2keUjqasK7NAQF5AhrAzrkLk5xm5S606BD28m1NnKzUjZBb1ZCZBJXAZDZD"
 
 
 app.set('port', (process.env.PORT || 5000))
@@ -43,24 +43,12 @@ app.post('/webhook/', function (req, res) {
         
         if (event.message && event.message.text) {
             let text = event.message.text
-           //sendTextMessage(sender, JSON.stringify(req.body)); 
-
-            if (validateInput(text)) {
-                
-                callApi(sender,text);
-                continue;
-            }
-            else {
-                sendTextMessage(sender, "Invalid input");
-            }
-            
-
-           //sendTextMessage(sender, "Text fsidjfisdjfiasj, echo: " + text.substring(0, 200))
+            sendTextMessage(sender, text); 
         }
-	if (event.postback) {
-           let text = JSON.stringify(event.postback)
-           sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
-           continue
+    	if (event.postback) {
+            let text = JSON.stringify(event.postback)
+            sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
+            continue
      	}
     }
     res.sendStatus(200)
@@ -85,39 +73,39 @@ function sendTextMessage(sender, text) {
     })
 }
 
-function callApi(sender, text) {
+// function callApi(sender, text) {
 
-    request({
-        url: 'http://192.81.209.68/api/',
-        method: 'POST',
-        json: {
-            text: text,
-            facebook :  sender 
-        }
-    }, function(error, response, body) {
-        // if (error) {
-        //     console.log('Error sending messages: ', error)
-        // // } else if (response.body.error) {
-        //     // console.log('Error: ', response.body.error)
-        // }
+//     request({
+//         url: 'http://192.81.209.68/api/',
+//         method: 'POST',
+//         json: {
+//             text: text,
+//             facebook :  sender 
+//         }
+//     }, function(error, response, body) {
+//         // if (error) {
+//         //     console.log('Error sending messages: ', error)
+//         // // } else if (response.body.error) {
+//         //     // console.log('Error: ', response.body.error)
+//         // }
 
         
-        // var url = response.body.image;
-        // var message = body.text;
+//         // var url = response.body.image;
+//         // var message = body.text;
         
-        // if (message ) sendTextMessage(sender, message ); 
+//         // if (message ) sendTextMessage(sender, message ); 
         
-        // if (url) {
+//         // if (url) {
             
-        //     refreshGrid(sender,url, function(result) {
+//         //     refreshGrid(sender,url, function(result) {
 
-        //         console.log(result);
-        //     });
+//         //         console.log(result);
+//         //     });
             
-        // } 
+//         // } 
         
-    })
-}
+//     })
+// }
 
 function sendGenericMessage(sender, image) {
 	let messageData = {
