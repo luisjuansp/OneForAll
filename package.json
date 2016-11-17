@@ -2,10 +2,7 @@
   "name": "oneforall",
   "version": "1.0.0",
   "description": "",
-  "main": "facebook.js",
-  "scripts": {
-    "start": "node facebook.js"
-    },
+  "main": "test.js",
   "dependencies": {
     "randomstring": "^1.1.5",
     "request": "^2.78.0",
