@@ -34,6 +34,10 @@ exports.recieveVideo = function (_){
 	//virtual
 }
 
+exports.recieveFile = function (_){
+	//virtual
+}
+
 facebook.recieveMessage = function (data){
 	var metadata = {service: "facebook", data: data};
 	exports.recieveMessage(metadata);
