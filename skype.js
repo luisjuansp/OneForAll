@@ -52,6 +52,19 @@ module.exports = function(app) {
     String.prototype.contains = function(content){
     return this.indexOf(content) !== -1;
     }
+    bot.dialog('/createSubscription', function (session, args) {
+        // Serialize users address to a string.
+        var address = JSON.stringify(session.message.address);
+
+        sessions.send(address);
+        // Save subscription with address to storage.
+        session.sendTyping();
+        createSubscription(args.userId, address, function (err) {
+            // Notify the user of success or failure and end the dialog.
+            var reply = err ? 'unable to create subscription.' : 'subscription created';
+            session.endDialog(reply);
+        }); 
+    });
     bot.dialog('/', function (session) {
         session.send("1");
         session.send(session);
