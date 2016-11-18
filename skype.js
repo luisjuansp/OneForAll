@@ -52,7 +52,6 @@ module.exports = function(app) {
     String.prototype.contains = function(content){
     return this.indexOf(content) !== -1;
     }
-    /*
     bot.dialog('/', function (session) {
         session.send(session.message.from);
         session.send(session.message.recipient);
@@ -66,8 +65,8 @@ module.exports = function(app) {
     });
 
 
-    */
 
+    /*
     bot.dialog('/', [
         function (session) {
             session.beginDialog('/ensureProfile', session.userData.profile);
@@ -103,6 +102,7 @@ module.exports = function(app) {
             session.endDialogWithResult({ response: session.dialogData.profile });
         }
     ]);
+    */
 
 
 //module.exports = exports;
