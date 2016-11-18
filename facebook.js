@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const request = require('request')
 const app = express()
 
-const token = "EAAS6Ppy5MfcBANOiIm3pfBqZAWXxcnUGxEZB8kB7G5NgfMIo1sZBZCxwYNhZBULmzQLg3p0cz1kHZBS5484YJcz5WaWrUJD7gQ9yq2jY1QiXZBSTl3dfVqsjK2keUjqasK7NAQF5AhrAzrkLk5xm5S606BD28m1NnKzUjZBb1ZCZBJXAZDZD"
+const token = "EAAS6Ppy5MfcBAEEuoEdWEAmLrVWtLtUKlCtBU9q2ZAA1KJaKf8LBeQY23yGTHY4tZBQfkDtlF3JYU06M1SWYYXiuW77qgCPOZA4ms3cZC7uH3dIBK5fK4tsSJveXcChMzEFTk3CmGE6mRSZAf7II13UBXdCqZBIpGtuSpEWyHDvAZDZD"
 
 
 app.set('port', (process.env.PORT || 5000))
@@ -36,8 +36,10 @@ app.listen(app.get('port'), function() {
 })
 
 app.post('/webhook/', function (req, res) {
-    
-    sendTextMessage(603028505, "test");
+    let messaging_events = req.body.entry[0].messaging;
+    let sender = event.sender.id
+
+    sendTextMessage(sender, messaging_events);
     /*
     for (let i = 0; i < messaging_events.length; i++) {
 
@@ -54,8 +56,8 @@ app.post('/webhook/', function (req, res) {
             continue
      	}
     }
-    res.sendStatus(200)
     */
+    res.sendStatus(200)
 })
 
 function sendTextMessage(sender, text) {
