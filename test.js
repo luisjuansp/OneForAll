@@ -3,13 +3,12 @@ var request = require('request');
 
 
 oneForAll.recieveMessage = function(message){
-	request.post({url:'http://159.203.78.76/receiveMessage', message: message}, function optionalCallback(err, httpResponse, body) {
+	request.post({url:'http://159.203.78.76/api/receivetext', message: message}, function optionalCallback(err, httpResponse, body) {
 	});
-	oneForAll.sendMessage([message]);
 }
 
 oneForAll.recieveImage = function(message){
-	request.post({url:'http://159.203.78.76/receiveImage', message: message}, function optionalCallback(err, httpResponse, body) {
+	request.post({url:'http://159.203.78.76/api/receiveimage', message: message}, function optionalCallback(err, httpResponse, body) {
 	});
 	oneForAll.sendImage([message]);
 }
