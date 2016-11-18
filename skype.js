@@ -25,9 +25,22 @@ module.exports = function(app) {
 
 
     var bot = new builder.UniversalBot(connector);
-    app.post('/skypehook', connector.listen());
-    //server.post('/api/messages', connector.listen());
-    //Bot on
+    //app.post('/skypehook', connector.listen());
+    app.post('/skypehook',  function (req, res) {
+    // Process posted notification
+        var address = JSON.parse(req.body.address);
+        var notification = req.body.notification;
+
+        // Send notification as a proactive message
+        var msg = new builder.Message()
+            .address(address)
+            .text(notification);
+        bot.send(msg, function (err) {
+            // Return success/failure
+            res.status(err ? 500 : 200);
+            res.end();
+        });
+    });
     bot.on('contactRelationUpdate', function (message) {
         if (message.action === 'add') {
             var name = message.user ? message.user.name : null;
