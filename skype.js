@@ -9,7 +9,7 @@ const app = express()
 // Bot Setup
 //=========================================================
 // Setup Restify Server
-var server = restify.createServer();
+//var server = restify.createServer();
 var exports = {};
 
 app.set('port',  5001);
@@ -19,9 +19,9 @@ app.listen(app.get('port'), function() {
 })
 
 app.get('/', function (req, res) {
-    res.send('Facebook API twerks')
+    res.send('Skype API twerks')
 })
-
+/*
 // Create chat bot
 var connector = new builder.ChatConnector({
     appId: config.skype_app_id,
@@ -68,3 +68,4 @@ bot.dialog('/', function (session) {
 });
 
 
+*/
