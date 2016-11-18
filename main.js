@@ -14,6 +14,24 @@ exports.sendImage = function (metadata) {
 	}
 }
 
+exports.sendAudio = function (metadata) {
+	if(metadata.service == "facebook"){
+		facebook.sendAudio(metadata.data);
+	}
+}
+
+exports.sendGif = function (metadata) {
+	if(metadata.service == "facebook"){
+		facebook.sendGif(metadata.data);
+	}
+}
+
+exports.sendVideo = function (metadata) {
+	if(metadata.service == "facebook"){
+		facebook.sendVideo(metadata.data);
+	}
+}
+
 exports.recieveMessage = function (_){
 	//virtual
 }
@@ -42,6 +60,21 @@ facebook.recieveMessage = function (data){
 facebook.recieveImage = function (data){
 	var metadata = {service: "facebook", data: data};
 	exports.recieveImage(metadata);
+}
+
+facebook.recieveAudio = function (data){
+	var metadata = {service: "facebook", data: data};
+	exports.recieveAudio(metadata);
+}
+
+facebook.recieveGif = function (data){
+	var metadata = {service: "facebook", data: data};
+	exports.recieveGif(metadata);
+}
+
+facebook.recieveVideo = function (data){
+	var metadata = {service: "facebook", data: data};
+	exports.recieveVideo(metadata);
 }
 
 exports.listen = function () {

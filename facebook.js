@@ -92,9 +92,21 @@ function receivedMessage(event) {
   } else if (messageAttachments) {
     
     messageAttachments.forEach(function(attachment) {
-
-        //exports.recieveMessage({id: senderID, text: JSON.stringify(attachment.payload.url)});
-        exports.recieveImage({id : senderID, url : attachment.payload.url});
+        var data = {id : senderID, url : attachment.payload.url};
+        switch (attachment.type) {
+            case "image":
+                exports.recieveImage(data);
+            break;
+            case "video":
+                exports.recieveVideo(data);
+            break;
+            case "audio":
+                exports.recieveAudio(data);
+            break;
+            default:
+                exports.recieveMessage(data)
+            break;
+        }
 
     });
   }
@@ -197,6 +209,52 @@ exports.sendImage = function(data) {
             message: {
                     attachment: {
                     type: "image",
+                    payload: {
+                        url	: data.url,
+                    }
+                }
+            },
+            recipient: {id:data.id}            
+        };
+    callSendAPI(messageData);
+}
+
+
+exports.sendAudio = function(data) {
+     let messageData = {
+            message: {
+                    attachment: {
+                    type: "audio",
+                    payload: {
+                        url	: data.url,
+                    }
+                }
+            },
+            recipient: {id:data.id}            
+        };
+    callSendAPI(messageData);
+}
+
+exports.sendGif = function(data) {
+     let messageData = {
+            message: {
+                    attachment: {
+                    type: "image",
+                    payload: {
+                        url	: data.url,
+                    }
+                }
+            },
+            recipient: {id:data.id}            
+        };
+    callSendAPI(messageData);
+}
+
+exports.sendVideo = function(data) {
+     let messageData = {
+            message: {
+                    attachment: {
+                    type: "video",
                     payload: {
                         url	: data.url,
                     }
