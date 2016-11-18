@@ -38,7 +38,8 @@ app.listen(app.get('port'), function() {
 app.post('/webhook/', function (req, res) {
 
     let messaging_events = req.body.entry[0].messaging;
-    let sender = event.sender.id
+    //let sender = event.sender.id
+    var sender = "10157758880380472";
     console.log(sender);
     sendTextMessage(sender, sender);
 
