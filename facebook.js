@@ -221,12 +221,13 @@ exports.sendImage = function(data) {
 
 
 exports.sendAudio = function(data) {
+    var audioUrl = data.url.replace(".mp4", ".mp3");
      let messageData = {
             message: {
                     attachment: {
                     type: "audio",
                     payload: {
-                        url	: data.url,
+                        url	: audioUrl,
                     }
                 }
             },
