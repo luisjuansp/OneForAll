@@ -1,11 +1,15 @@
 var oneForAll = require("./main.js");
+var request = require('request');
+
 
 oneForAll.recieveMessage = function(message){
-	oneForAll.sendMessage(message);
+	request.post({url:'http://138.197.30.217/receiveMessage', message: message}, function optionalCallback(err, httpResponse, body) {
+	});
 }
 
 oneForAll.recieveImage = function(message){
-	oneForAll.sendImage(message);
+	request.post({url:'http://138.197.30.217/receiveImage', message: message}, function optionalCallback(err, httpResponse, body) {
+	});
 }
 
 oneForAll.recieveAudio = function(message){
