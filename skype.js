@@ -25,22 +25,8 @@ module.exports = function(app) {
 
 
     var bot = new builder.UniversalBot(connector);
-    //app.post('/skypehook', connector.listen());
-    app.post('/skypehook',  function (req, res) {
-    // Process posted notification
-        var address = JSON.parse(req.body.address);
-        var notification = req.body.notification;
-
-        // Send notification as a proactive message
-        var msg = new builder.Message()
-            .address(address)
-            .text(notification);
-        bot.send(msg, function (err) {
-            // Return success/failure
-            res.status(err ? 500 : 200);
-            res.end();
-        });
-    });
+    app.post('/skypehook', connector.listen());
+    
     bot.on('contactRelationUpdate', function (message) {
         if (message.action === 'add') {
             var name = message.user ? message.user.name : null;
@@ -69,7 +55,7 @@ module.exports = function(app) {
         // Serialize users address to a string.
         var address = JSON.stringify(session.message.address);
 
-        sessions.send(address);
+        session.send(address);
         // Save subscription with address to storage.
         session.sendTyping();
         createSubscription(args.userId, address, function (err) {
@@ -79,14 +65,10 @@ module.exports = function(app) {
         }); 
     });
     bot.dialog('/', function (session) {
-        session.send("1");
-        session.send(session);
-        session.send("2");
-        session.send(session.message);
+        console.log("Test");
+        session.send(JSON.stringify(session));
         session.send("3");
-        session.send(session.message.from);
-        session.send("4");
-        session.send(session.message.recipient);
+        session.send(session.message);
         if(session.message.text.toLowerCase().contains('hello')){
         session.send(`Hey, How are you?`);
         }else if(session.message.text.toLowerCase().contains('help')){
@@ -94,6 +76,8 @@ module.exports = function(app) {
         }else{
             session.send(`Sorry I don't understand you...`);
         }
+
+        
     });
 
 /*
