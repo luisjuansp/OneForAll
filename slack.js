@@ -93,13 +93,13 @@ bot.on('message', function(data){
 			  	}
 			};
 
-			if(data.file.mimetype.statsWith("image/gif")){
+			if(data.file.mimetype.startsWith("image/gif")){
 				exports.recieveGif(message);
-			} else if(data.file.mimetype.statsWith("video")){
+			} else if(data.file.mimetype.startsWith("video")){
 				exports.recieveVideo(message);
-			} else if(data.file.mimetype.statsWith("image")){
+			} else if(data.file.mimetype.startsWith("image")){
 				exports.recieveImage(message);
-			} else if(data.file.mimetype.statsWith("audio")){
+			} else if(data.file.mimetype.startsWith("audio")){
 				exports.recieveAudio(message);
 			} else {
 				exports.recieveFile(message);
