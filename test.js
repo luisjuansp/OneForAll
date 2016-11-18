@@ -9,13 +9,7 @@ oneForAll.recieveMessage = function(message){
 oneForAll.recieveImage = function(message){
 	
 	
-	oneForAll.sendImage({
-		service: message.service,
-		data: {
-			id : message.data.id,
-			url : message.data.url  
-		}
-	});
+	oneForAll.sendImage(message);
 	
 }
 
