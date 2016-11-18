@@ -27,7 +27,7 @@ oneForAll.recieveVideo = function(message){
 }
 
 oneForAll.app.post('/oneForAll', function (req, res) {
-	console.log(req);
+	// console.log(req);
 	req = req.body;
 	switch(req.action){
 		case "message":
@@ -38,4 +38,5 @@ oneForAll.app.post('/oneForAll', function (req, res) {
 		default:
 		break;
 	}
+	res.sendStatus(200);
 });
