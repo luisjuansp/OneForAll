@@ -2,7 +2,7 @@
   "name": "oneforall",
   "version": "1.0.0",
   "description": "",
-  "main": "facebook.js",
+  "main": "app.js",
   "dependencies": {
     "randomstring": "^1.1.5",
     "request": "^2.78.0",
@@ -13,7 +13,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node facebook.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
