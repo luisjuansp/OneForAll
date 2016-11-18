@@ -10,33 +10,43 @@ var skype = require("./skype.js")(app);
 var exports = {};
 
 exports.sendMessage = function (metadata) {
-	if(metadata.service == "facebook"){
-		facebook.sendMessage(metadata.data);
-	}
+	metadata.forEach((meta) => {
+		if(meta.service == "facebook"){
+			facebook.sendMessage(metadata.data);
+		}
+	});
 }
 
 exports.sendImage = function (metadata) {
-	if(metadata.service == "facebook"){
-		facebook.sendImage(metadata.data);
-	}
+	metadata.forEach((meta) => {
+		if(meta.service == "facebook"){
+			facebook.sendImage(metadata.data);
+		}
+	});
 }
 
 exports.sendAudio = function (metadata) {
-	if(metadata.service == "facebook"){
-		facebook.sendAudio(metadata.data);
-	}
+	metadata.forEach((meta) => {
+		if(meta.service == "facebook"){
+			facebook.sendAudio(metadata.data);
+		}
+	});
 }
 
 exports.sendGif = function (metadata) {
-	if(metadata.service == "facebook"){
-		facebook.sendGif(metadata.data);
-	}
+	metadata.forEach((meta) => {
+		if(meta.service == "facebook"){
+			facebook.sendGif(metadata.data);
+		}
+	});
 }
 
 exports.sendVideo = function (metadata) {
-	if(metadata.service == "facebook"){
-		facebook.sendVideo(metadata.data);
-	}
+	metadata.forEach((meta) => {
+		if(meta.service == "facebook"){
+			facebook.sendVideo(metadata.data);
+		}
+	});
 }
 
 exports.recieveMessage = function (_){
@@ -88,9 +98,6 @@ facebook.recieveVideo = function (data){
 	exports.recieveVideo(metadata);
 }
 
-/*exports.listen = function () {
-	facebook.listen();
-	skype.listen();
-;}*/
+exports.app = app;
 
 module.exports = exports;

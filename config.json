@@ -1,11 +1,9 @@
 {
     "facebook_token" : "EAAS6Ppy5MfcBAEEuoEdWEAmLrVWtLtUKlCtBU9q2ZAA1KJaKf8LBeQY23yGTHY4tZBQfkDtlF3JYU06M1SWYYXiuW77qgCPOZA4ms3cZC7uH3dIBK5fK4tsSJveXcChMzEFTk3CmGE6mRSZAf7II13UBXdCqZBIpGtuSpEWyHDvAZDZD",
     "facebook_verify_token" : "test_token",
-
     "skype_password" : "M6jeZBRQUS6BpsjoTGYm5Bz",
     "skype_app_id" : "c0da9bb4-84b8-478b-aa12-821afff946f7",
-
-    "slack_token" : "xoxb-106383320373-Y6DKxUMZbx6EEl9bCUEvYi4S",
+    "slack_token" : "xoxb-106383320373-6thLwDj9oB8ofIuG9g9UgWJZ",
     "slack_name" : "oneforall"
 
 }
