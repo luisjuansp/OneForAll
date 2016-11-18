@@ -222,23 +222,18 @@ exports.sendImage = function(data) {
 
 exports.sendAudio = function(data) {
     var audioUrl = data.url.replace(".mp4", ".mp3");
-    
      let messageData = {
             message: {
                     attachment: {
                     type: "audio",
                     payload: {
-                        url	: audioUrl,
+                        url	: data.url,
                     }
                 }
             },
             recipient: {id:data.id}            
         };
-        let testmessageData = {
-            recipient: {id:data.id},
-            message: { text:audioUrl },
-        };
-    callSendAPI(testmessageData);
+    callSendAPI(messageData);
 }
 
 exports.sendGif = function(data) {

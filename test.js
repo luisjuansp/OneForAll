@@ -9,7 +9,7 @@ oneForAll.recieveImage = function(message){
 }
 
 oneForAll.recieveAudio = function(message){
-	oneForAll.sendImage(message);
+	oneForAll.sendAudio(message);
 }
 
 oneForAll.recieveGif = function(message){
