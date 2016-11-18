@@ -24,8 +24,6 @@ bot.onText(/\/echo (.+)/, function (msg, match) {
 // messages.
 bot.on('message', function (msg) {
   var chatId = msg.chat.id;
-  console.log(msg);
-
 
   if ( msg.text ){
         var data = {id : chatId, text : msg.text};
@@ -37,7 +35,9 @@ bot.on('message', function (msg) {
         var data = {id : chatId, photo : photo };
         //bot.sendPhoto(chatId, photo );
         var url = bot.getFile(photo);
+        console.log("1");
         console.log(url);
+        console.log("2");
         exports.recieveImage(data);
   }
   else if (msg.video) {
