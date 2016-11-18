@@ -15,10 +15,13 @@ var exports = {};
 
 exports.sendMessage = function (metadata) {
 	metadata.forEach((meta) => {
+		
 		if(meta.service == "facebook"){
 			facebook.sendMessage(meta.data);
 		} else if(meta.service == "slack"){
 			slack.sendMessage(meta.data);
+		} else if (meta.service == "telegram") {
+			telegram.sendMessage(meta.data);
 		}
 	});
 }
@@ -147,6 +150,7 @@ telegram.recieveGif = function (data){
 
 telegram.recieveVideo = function (data){
 	var metadata = {service: "telegram", data: data};
+	exports.recieveVideo(metadata);
 }
 
 slack.recieveMessage = function (data){
