@@ -5,6 +5,8 @@ const bodyParser = require('body-parser')
 const request = require('request')
 const app = express()
 
+var exports = {};
+
 const token = "EAAS6Ppy5MfcBAEEuoEdWEAmLrVWtLtUKlCtBU9q2ZAA1KJaKf8LBeQY23yGTHY4tZBQfkDtlF3JYU06M1SWYYXiuW77qgCPOZA4ms3cZC7uH3dIBK5fK4tsSJveXcChMzEFTk3CmGE6mRSZAf7II13UBXdCqZBIpGtuSpEWyHDvAZDZD"
 
 
@@ -30,10 +32,12 @@ app.get('/webhook/', function (req, res) {
     }
 })
 
-// Spin up the server
-app.listen(app.get('port'), function() {
-    console.log('running on port', app.get('port'))
-})
+exports.listen = function () {
+    // Spin up the server
+    app.listen(app.get('port'), function() {
+        console.log('running on port', app.get('port'))
+    })
+};
 
 app.post('/webhook/', function (req, res) {
 
@@ -183,3 +187,5 @@ app.get("/send", function(req, res){
 	//bot.postMessage("D25K85JSX", req);
 	
 });
+
+module.exports = exports;
