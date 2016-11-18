@@ -56,10 +56,12 @@ bot.on('message', function (msg) {
 });
 
 exports.sendMessage = function(data) {
+    console.log(data);
     bot.sendMessage(data.id, data.text);
 }
 
 exports.sendImage = function(data) {
+    console.log(data);
     bot.sendImage(data.id, data.image);
 }
 
