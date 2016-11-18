@@ -32,85 +32,98 @@ app.get('/webhook/', function (req, res) {
     }
 })
 
-app.post('/webhook/', function (req, res) {
 
-    let messaging_events = req.body.entry[0].messaging;
+app.post('/webhook', function (req, res) {
+  var data = req.body;
+
+  // Make sure this is a page subscription
+  if (data.object == 'page') {
+    // Iterate over each entry
+    // There may be multiple if batched
+    data.entry.forEach(function(pageEntry) {
+      var pageID = pageEntry.id;
+      var timeOfEvent = pageEntry.time;
+
+      // Iterate over each messaging event
+      pageEntry.messaging.forEach(function(messagingEvent) {
+        if (messagingEvent.message) {
+            //exports.recieveMessage({id: sender, text: text});
+            receivedMessage(messagingEvent);
+        } else {
+          console.log("Webhook received unknown messagingEvent: ", messagingEvent);
+        }
+      });
+    });
+
+    // Assume all went well.
+    //
+    // You must send back a 200, within 20 seconds, to let us know you've 
+    // successfully received the callback. Otherwise, the request will time out.
+    res.sendStatus(200);
+  }
+});
+
+
+function receivedMessage(event) {
+  var senderID = event.sender.id;
+  var recipientID = event.recipient.id;
+  var timeOfMessage = event.timestamp;
+  var message = event.message;
+
+
+  var messageId = message.mid;
+  var appId = message.app_id;
+  var metadata = message.metadata;
+
+  // You may get a text or attachment but not both
+  var messageText = message.text;
+  var messageAttachments = message.attachments;
+
+ 
+
+  if (messageText) {
+
+    // If we receive a text message, check to see if it matches any special
+    // keywords and send back the corresponding example. Otherwise, just echo
+    // the text we received.
+
+    exports.recieveMessage({id: senderID, text: messageText});
     
-    for (let i = 0; i < messaging_events.length; i++) {
-
-        let event = req.body.entry[0].messaging[i]
-        let sender = event.sender.id
-        
-        if (event.message) {
-            // if(event.message.text){
-                let text = event.message.text
-                exports.recieveMessage({id: sender, text: JSON.stringify(event.message)}); 
-            // }
-        }
-    	if (event.postback) {
-            let text = JSON.stringify(event.postback)
-            sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
-            continue
-     	}
-    }
+  } else if (messageAttachments) {
     
-    res.sendStatus(200)
-})
+    messageAttachments.forEach(function(attachment) {
 
-function sendTextMessage(sender, text) {
-    let messageData = { text:text }
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
+        //exports.recieveMessage({id: senderID, text: JSON.stringify(attachment.payload.url)});
+        exports.recieveImage({id : senderID, url : attachment.payload.url});
+
+    });
+  }
 }
 
-exports.sendTextMessage = sendTextMessage;
+function callSendAPI(messageData) {
+  request({
+    uri: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: { access_token: token },
+    method: 'POST',
+    json: messageData
 
-// function callApi(sender, text) {
+  }, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      var recipientId = body.recipient_id;
+      var messageId = body.message_id;
 
-//     request({
-//         url: 'http://192.81.209.68/api/',
-//         method: 'POST',
-//         json: {
-//             text: text,
-//             facebook :  sender 
-//         }
-//     }, function(error, response, body) {
-//         // if (error) {
-//         //     console.log('Error sending messages: ', error)
-//         // // } else if (response.body.error) {
-//         //     // console.log('Error: ', response.body.error)
-//         // }
-
-        
-//         // var url = response.body.image;
-//         // var message = body.text;
-        
-//         // if (message ) sendTextMessage(sender, message ); 
-        
-//         // if (url) {
-            
-//         //     refreshGrid(sender,url, function(result) {
-
-//         //         console.log(result);
-//         //     });
-            
-//         // } 
-        
-//     })
-// }
+      if (messageId) {
+        console.log("Successfully sent message with id %s to recipient %s", 
+          messageId, recipientId);
+      } else {
+      console.log("Successfully called Send API for recipient %s", 
+        recipientId);
+      }
+    } else {
+      console.error("Failed calling Send API", response.statusCode, response.statusMessage, body.error);
+    }
+  });  
+}
 
 
 app.post("/send", function(req, res){
@@ -172,49 +185,26 @@ exports.recieveMessage = function (data) {
 }
 
 exports.sendMessage = function (data) {
-    let messageData = { text:data.text }
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
+    let messageData = {
             recipient: {id:data.id},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
+            message: { text:data.text },
+        };
+    callSendAPI(messageData);
 }
 
 exports.sendImage = function(data) {
-	let messageData = {
-
-        "attachment": {
-			"type": "image",
-			"payload": {
-				"url"	: data.image,
-			}
-		}
-	}
-	request({
-		url: 'https://graph.facebook.com/v2.6/me/messages',
-		qs: {access_token:token},
-		method: 'POST',
-		json: {
-			recipient: {id : data.id},
-			message: messageData,
-		}
-	}, function(error, response, body) {
-		if (error) {
-			console.log('Error sending messages: ', error)
-		} else if (response.body.error) {
-			console.log('Error: ', response.body.error)
-		}
-	})
+     let messageData = {
+            message: {
+                    attachment: {
+                    type: "image",
+                    payload: {
+                        url	: data.url,
+                    }
+                }
+            },
+            recipient: {id:data.id}            
+        };
+    callSendAPI(messageData);
 }
 
 module.exports = exports;
