@@ -12,13 +12,7 @@ const app = express()
 //var server = restify.createServer();
 var exports = {};
 
-app.set('port',  (process.env.PORT || 5001));
 
-exports.listen = function () {
-    app.listen(app.get('port'), function() {
-            console.log('running on port', app.get('port'))
-    })
-};
 app.get('/', function (req, res) {
     res.send('Skype API twerks')
 })
