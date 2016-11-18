@@ -2,8 +2,10 @@ var facebook = require('./facebook.js');
 
 var exports = {};
 
-exports.sendMessage = function (data) {
-	facebook.sendMessage(data);
+exports.sendMessage = function (metadata) {
+	if(metadata.service == "facebook"){
+		facebook.sendMessage(metadata.data);
+	}
 }
 
 exports.recieveMessage = function (data){
@@ -11,6 +13,7 @@ exports.recieveMessage = function (data){
 }
 
 facebook.recieveMessage = function (data){
+	var metadata = {service: "facebook", data: data};
 	exports.recieveMessage(data);
 }
 
