@@ -2,7 +2,8 @@ var routes = require("./routes");
 var app = routes();
 
 var facebook = require('./facebook.js')(app);
-var skype = require("./skype.js")(app);
+var telegram = require('./telegram.js');
+//var skype = require("./skype.js")(app);
 
 //var slack = require('./slack.js');
 
@@ -22,6 +23,9 @@ exports.sendImage = function (metadata) {
 		if(meta.service == "facebook"){
 			facebook.sendImage(meta.data);
 		}
+		else if ( meta.service == "telegram") {
+			telegram.sendImage(meta.data);
+		}
 	});
 }
 
@@ -29,6 +33,9 @@ exports.sendAudio = function (metadata) {
 	metadata.forEach((meta) => {
 		if(meta.service == "facebook"){
 			facebook.sendAudio(meta.data);
+		}
+		else if ( meta.service == "telegram") {
+			telegram.sendAudio(meta.data);
 		}
 	});
 }
@@ -38,6 +45,9 @@ exports.sendGif = function (metadata) {
 		if(meta.service == "facebook"){
 			facebook.sendGif(meta.data);
 		}
+		else if ( meta.service == "telegram") {
+			telegram.sendGif(meta.data);
+		}
 	});
 }
 
@@ -45,6 +55,9 @@ exports.sendVideo = function (metadata) {
 	metadata.forEach((meta) => {
 		if(meta.service == "facebook"){
 			facebook.sendVideo(meta.data);
+		}
+		else if ( meta.service == "telegram") {
+			telegram.sendVideo(meta.data);
 		}
 	});
 }
@@ -95,6 +108,31 @@ facebook.recieveGif = function (data){
 
 facebook.recieveVideo = function (data){
 	var metadata = {service: "facebook", data: data};
+	exports.recieveVideo(metadata);
+}
+
+telegram.recieveMessage = function (data){
+	var metadata = {service: "telegram", data: data};
+	exports.recieveMessage(metadata);
+}
+
+telegram.recieveImage = function (data){
+	var metadata = {service: "telegram", data: data};
+	exports.recieveImage(metadata);
+}
+
+telegram.recieveAudio = function (data){
+	var metadata = {service: "telegram", data: data};
+	exports.recieveAudio(metadata);
+}
+
+telegram.recieveGif = function (data){
+	var metadata = {service: "telegram", data: data};
+	exports.recieveGif(metadata);
+}
+
+telegram.recieveVideo = function (data){
+	var metadata = {service: "telegram", data: data};
 	exports.recieveVideo(metadata);
 }
 
