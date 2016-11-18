@@ -90,8 +90,12 @@ function receivedMessage(event) {
     exports.recieveMessage({id: senderID, text: messageText});
     
   } else if (messageAttachments) {
+    
+    messageAttachments.forEach(function(attachment) {
 
-    exports.recieveMessage({id: senderID, text: JSON.stringify(messageAttachments)});
+        exports.recieveMessage({id: senderID, text: JSON.stringify(attachment.payload.url)});
+
+    });
     //exports.recieveImage({id : senderID, url : messageAttachments.payload.url});
   }
 }
