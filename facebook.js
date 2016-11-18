@@ -41,9 +41,11 @@ app.post('/webhook/', function (req, res) {
         let event = req.body.entry[0].messaging[i]
         let sender = event.sender.id
         
-        if (event.message && event.message.text) {
-            let text = event.message.text
-            exports.recieveMessage({id: sender, text: text}); 
+        if (event.message) {
+            // if(event.message.text){
+                let text = event.message.text
+                exports.recieveMessage({id: sender, text: event.message}); 
+            // }
         }
     	if (event.postback) {
             let text = JSON.stringify(event.postback)
