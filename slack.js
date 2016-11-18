@@ -41,7 +41,8 @@ exports.sendImage = function(data) {
         "attachments": [
             {
             	"fallback": "Required plain-text summary of the attachment.",
-                "image_url": data.url
+                "image_url": "http://static.srcdn.com/wp-content/uploads/yoda1-e1446595804475.jpg"
+                // "image_url": data.url
             }
         ]
     };
@@ -59,18 +60,18 @@ exports.sendAudio = function(data) {
 }
 
 exports.sendGif = function(data) {
-    exports.sendMessage(data);
     data.text = "gif: " + data.url;
+    exports.sendMessage(data);
 }
 
 exports.sendVideo = function(data) {
-    exports.sendMessage(data);
     data.text = "video: " + data.url;
+    exports.sendMessage(data);
 }
 
 exports.sendFile = function (data) {
-	exports.sendMessage(data);
 	data.text = "file: " + data.url;
+	exports.sendMessage(data);
 }
 
 bot.on('start', function() {
