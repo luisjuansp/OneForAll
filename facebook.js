@@ -25,8 +25,9 @@ app.get('/', function (req, res) {
 app.get('/webhook/', function (req, res) {
     if (req.query['hub.verify_token'] === 'test_token') {
         res.send(req.query['hub.challenge'])
+    } else {
+        res.send('Error, wrong token')
     }
-    res.send('Error, wrong token')
 })
 
 // Spin up the server
@@ -35,10 +36,15 @@ app.listen(app.get('port'), function() {
 })
 
 app.post('/webhook/', function (req, res) {
+
     let messaging_events = req.body.entry[0].messaging;
     let sender = event.sender.id
     console.log(sender);
     sendTextMessage(sender, sender);
+
+    
+    sendTextMessage(603028505, "test");
+
     /*
     for (let i = 0; i < messaging_events.length; i++) {
 
