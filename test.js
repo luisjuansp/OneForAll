@@ -3,26 +3,27 @@ var request = require('request');
 
 
 oneForAll.recieveMessage = function(message){
-	request.post({url:'http://138.197.30.217/receiveMessage', message: message}, function optionalCallback(err, httpResponse, body) {
+	request.post({url:'http://159.203.78.76/api/receivetext', message: message}, function optionalCallback(err, httpResponse, body) {
 	});
 	oneForAll.sendMessage([message]);
 }
 
 oneForAll.recieveImage = function(message){
-	request.post({url:'http://138.197.30.217/receiveImage', message: message}, function optionalCallback(err, httpResponse, body) {
+	request.post({url:'http://159.203.78.76/api/receiveimage', message: message}, function optionalCallback(err, httpResponse, body) {
 	});
+	oneForAll.sendImage([message]);
 }
 
 oneForAll.recieveAudio = function(message){
-	oneForAll.sendAudio(message);
+	oneForAll.sendAudio([message]);
 }
 
 oneForAll.recieveGif = function(message){
-	oneForAll.sendGif(message);
+	oneForAll.sendGif([message]);
 }
 
 oneForAll.recieveVideo = function(message){
-	oneForAll.sendVideo(message);
+	oneForAll.sendVideo([message]);
 }
 
 oneForAll.app.post('/oneForAll', function (req, res) {

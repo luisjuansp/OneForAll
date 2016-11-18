@@ -37,138 +37,77 @@ exports.recieveFile = function (_){
 }
 
 exports.sendImage = function(data) {
-    var messageData = {
-            message: {
-                    attachment: {
-                    type: "image",
-                    payload: {
-                        url	: data.url,
-                    }
-                }
-            },
-            recipient: {id:data.id}            
-        };
-    callSendAPI(messageData);
+    var params = {
+        "attachments": [
+            {
+            	"fallback": "Required plain-text summary of the attachment.",
+                "image_url": data.url
+            }
+        ]
+    };
+
+    bot.postMessage(data.id, data.url, params);
 }
 
+exports.sendMessage = function(data) {
+    bot.postMessage(data.id, data.text);
+}
 
 exports.sendAudio = function(data) {
-    
-    var messageData = {
-            message: {
-                    attachment: {
-                    type: "audio",
-                    payload: {
-                        url	: data.url,
-                    }
-                }
-            },
-            recipient: {id:data.id}            
-        };
-    callSendAPI(messageData);
+	data.text = "audio: " + data.url;
+    exports.sendMessage(data);
 }
 
 exports.sendGif = function(data) {
-    var messageData = {
-            message: {
-                    attachment: {
-                    type: "image",
-                    payload: {
-                        url	: data.url,
-                    }
-                }
-            },
-            recipient: {id:data.id}            
-        };
-    callSendAPI(messageData);
+    exports.sendMessage(data);
+    data.text = "gif: " + data.url;
 }
 
 exports.sendVideo = function(data) {
-    var messageData = {
-            message: {
-                    attachment: {
-                    type: "video",
-                    payload: {
-                        url	: data.url,
-                    }
-                }
-            },
-            recipient: {id:data.id}            
-        };
-    callSendAPI(messageData);
+    exports.sendMessage(data);
+    data.text = "video: " + data.url;
+}
+
+exports.sendFile = function (data) {
+	exports.sendMessage(data);
+	data.text = "file: " + data.url;
 }
 
 bot.on('start', function() {
-	bot.postMessageToUser('lowes', 'meow!', function (data) {
+	bot.postMessageToUser('lowes', 'Booting!', function (data) {
 		botId = data.message.bot_id;
 	});
-	// var os = require('os');
-	// var ifaces = os.networkInterfaces();
-
-	// Object.keys(ifaces).forEach(function (ifname) {
-	//   	var alias = 0;
-
-	//   	ifaces[ifname].forEach(function (iface) {
-	//     	if ('IPv4' !== iface.family || iface.internal !== false) {
-	// 	      	// skip over internal (i.e. 127.0.0.1) and non-ipv4 addresses
-	// 	      	return;
-	//     	}
-
-	// 	    if (alias >= 1) {
-	// 	      	// this single interface has multiple ipv4 addresses
-	// 	      	console.log(ifname + ':' + alias, iface.address);
-	// 	    } else {
-	// 	      	// this interface has only one ipv4 adress
-	// 	      	console.log(ifname, iface.address);
-	// 	    }
-	// 	    ++alias;
-	//   	});
-	// });
 });
-
-
-var download = function(uri, filename, callback){
-	var options = {
-  		url: uri,
-  		headers: {
-    		'Authorization': 'Bearer ' + config.slack_token
-  		}
-	};
- 
-	request(options, function(err, res, body){
-		if(err){
-			console.log(err);
-		}else { 
-			console.log('content-type:', res.headers['content-type']);
-			console.log('content-length:', res.headers['content-length']);
-			request(options).pipe(fs.createWriteStream(filename)).on('close', callback);
-		}
-	});
-};
 
 bot.on('message', function(data){
 	if((data.bot_id == null || data.bot_id != botId) && data.type == "message"){
 		if (data.subtype == "file_share"){
-			var params = {
-	            "attachments": [
-	                {
-		            	"fallback": "Required plain-text summary of the attachment.",
-		                "image_url": data.file.url_private
-	                }
-	            ]
-	        };
 
-			download(data.file.url_private, data.file.id + "." + data.file.filetype, function(){
-			  console.log('done');
-			});
+			var message = {
+				id : data.channel,
+  				url: data.file.url_private,
+		  		httpOptions: {
+		  			headers: {
+			    		'Authorization': 'Bearer ' + config.slack_token
+			  		}
+			  	}
+			};
 
-			if(data.file.filetype){
-
+			if(data.file.mimetype.startsWith("image/gif")){
+				exports.recieveGif(message);
+			} else if(data.file.mimetype.startsWith("video")){
+				exports.recieveVideo(message);
+			} else if(data.file.mimetype.startsWith("image")){
+				exports.recieveImage(message);
+			} else if(data.file.mimetype.startsWith("audio")){
+				exports.recieveAudio(message);
+			} else {
+				exports.recieveFile(message);
 			}
-
-	        bot.postMessage(data.channel, data.file.id + "." + data.file.filetype, params);
 		} else{
 			exports.recieveMessage({id: data.channel, text: data.text});
 		}
 	}
 });
+
+module.exports = exports;
