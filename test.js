@@ -28,6 +28,7 @@ oneForAll.recieveVideo = function(message){
 
 oneForAll.app.post('/oneForAll', function (req, res) {
 	console.log(req);
+	req = req.body;
 	switch(req.action){
 		case "message":
 			oneForAll.sendMessage(req.metadata);
