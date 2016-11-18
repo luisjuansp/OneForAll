@@ -41,7 +41,7 @@ module.exports = function(app) {
     });
     bot.on('typing', function (message) {
     // User is typing
-    console.log(message);
+    //console.log(message);
     });
     bot.on('deleteUserData', function (message) {
         // User asked to delete their data
@@ -52,8 +52,27 @@ module.exports = function(app) {
     String.prototype.contains = function(content){
     return this.indexOf(content) !== -1;
     }
+    bot.dialog('/createSubscription', function (session, args) {
+        // Serialize users address to a string.
+        var address = JSON.stringify(session.message.address);
+
+        sessions.send(address);
+        // Save subscription with address to storage.
+        session.sendTyping();
+        createSubscription(args.userId, address, function (err) {
+            // Notify the user of success or failure and end the dialog.
+            var reply = err ? 'unable to create subscription.' : 'subscription created';
+            session.endDialog(reply);
+        }); 
+    });
     bot.dialog('/', function (session) {
+        session.send("1");
+        session.send(session);
+        session.send("2");
+        session.send(session.message);
+        session.send("3");
         session.send(session.message.from);
+        session.send("4");
         session.send(session.message.recipient);
         if(session.message.text.toLowerCase().contains('hello')){
         session.send(`Hey, How are you?`);
@@ -64,9 +83,45 @@ module.exports = function(app) {
         }
     });
 
-    /*
+/*
 
-    */
+    
+    bot.dialog('/', [
+        function (session) {
+            session.beginDialog('/ensureProfile', session.userData.profile);
+        },
+        function (session, results) {
+            session.userData.profile = results.response;
+            session.send('Hello %(name)s! I love %(company)s!', session.userData.profile);
+        }
+    ]);
+    bot.dialog('/ensureProfile', [
+        function (session, args, next) {
+            session.dialogData.profile = args || {};
+            if (!session.dialogData.profile.name) {
+                builder.Prompts.text(session, "What's your name?");
+            } else {
+                next();
+            }
+        },
+        function (session, results, next) {
+            if (results.response) {
+                session.dialogData.profile.name = results.response;
+            }
+            if (!session.dialogData.profile.company) {
+                builder.Prompts.text(session, "What company do you work for?");
+            } else {
+                next();
+            }
+        },
+        function (session, results) {
+            if (results.response) {
+                session.dialogData.profile.company = results.response;
+            }
+            session.endDialogWithResult({ response: session.dialogData.profile });
+        }
+    ]);*/
+    
 
 
 //module.exports = exports;
