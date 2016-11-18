@@ -60,21 +60,21 @@ exports.sendAudio = function(data) {
 
 exports.sendGif = function(data) {
     exports.sendMessage(data);
-    data.text = "audio: " + data.url;
+    data.text = "gif: " + data.url;
 }
 
 exports.sendVideo = function(data) {
     exports.sendMessage(data);
-    data.text = "audio: " + data.url;
+    data.text = "video: " + data.url;
 }
 
 exports.sendFile = function (data) {
 	exports.sendMessage(data);
-	data.text = "audio: " + data.url;
+	data.text = "file: " + data.url;
 }
 
 bot.on('start', function() {
-	bot.postMessageToUser('lowes', 'meow!', function (data) {
+	bot.postMessageToUser('lowes', 'Booting!', function (data) {
 		botId = data.message.bot_id;
 	});
 });
@@ -109,3 +109,5 @@ bot.on('message', function(data){
 		}
 	}
 });
+
+module.exports = exports;
