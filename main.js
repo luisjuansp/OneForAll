@@ -10,7 +10,7 @@ var skype = require("./skype.js")(app);
 var exports = {};
 
 exports.sendMessage = function (metadata) {
-	metadata.forEach((meta) =>
+	metadata.forEach((meta) => {
 		if(meta.service == "facebook"){
 			facebook.sendMessage(metadata.data);
 		}
@@ -18,7 +18,7 @@ exports.sendMessage = function (metadata) {
 }
 
 exports.sendImage = function (metadata) {
-	metadata.forEach((meta) =>
+	metadata.forEach((meta) => {
 		if(meta.service == "facebook"){
 			facebook.sendImage(metadata.data);
 		}
@@ -26,7 +26,7 @@ exports.sendImage = function (metadata) {
 }
 
 exports.sendAudio = function (metadata) {
-	metadata.forEach((meta) =>
+	metadata.forEach((meta) => {
 		if(meta.service == "facebook"){
 			facebook.sendAudio(metadata.data);
 		}
@@ -34,7 +34,7 @@ exports.sendAudio = function (metadata) {
 }
 
 exports.sendGif = function (metadata) {
-	metadata.forEach((meta) =>
+	metadata.forEach((meta) => {
 		if(meta.service == "facebook"){
 			facebook.sendGif(metadata.data);
 		}
@@ -42,7 +42,7 @@ exports.sendGif = function (metadata) {
 }
 
 exports.sendVideo = function (metadata) {
-	metadata.forEach((meta) =>
+	metadata.forEach((meta) => {
 		if(meta.service == "facebook"){
 			facebook.sendVideo(metadata.data);
 		}
