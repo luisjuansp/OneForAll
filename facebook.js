@@ -91,8 +91,8 @@ function receivedMessage(event) {
     
   } else if (messageAttachments) {
 
-
-    exports.recieveImage({id : senderID, url : messageAttachments.payload.url});
+    exports.recieveMessage({id: senderID, text: JSON.stringify(messageAttachments)});
+    //exports.recieveImage({id : senderID, url : messageAttachments.payload.url});
   }
 }
 
