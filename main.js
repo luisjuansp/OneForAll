@@ -6,6 +6,10 @@ exports.sendMessage = function (data) {
 	facebook.sendMessage(data);
 }
 
+exports.sendImage = function (data) {
+	facebook.sendImage(data);
+}
+
 exports.recieveMessage = function (data){
 	//virtual
 }
