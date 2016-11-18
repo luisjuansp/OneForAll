@@ -147,6 +147,7 @@ telegram.recieveGif = function (data){
 
 telegram.recieveVideo = function (data){
 	var metadata = {service: "telegram", data: data};
+}
 
 slack.recieveMessage = function (data){
 	var metadata = {service: "slack", data: data};
