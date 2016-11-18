@@ -194,12 +194,12 @@ exports.sendMessage = function (data) {
 
 exports.sendImage = function(data) {
      let messageData = {
-            attachment: {
+            attachment: [{
                 type: "image",
                 payload: {
                     url	: data.url,
                 }
-            },
+            }],
             recipient: {id:data.id}            
         };
     callSendAPI(messageData);
