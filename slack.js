@@ -15,7 +15,7 @@ bot.on('start', function() {
 });
 
 bot.on('message', function(data){
-	if(data.type == "message")){
+	if(data.type == "message"){
 		postMessageToChannel(data.channel, data);
 	}
 });
