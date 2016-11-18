@@ -8,11 +8,11 @@ var config = require('./config.json');
 var server = restify.createServer();
 var exports = {};
 
-exports.listen = function () {
+
     server.listen( 5001, function () {
     console.log('%s listening to %s', server.name, server.url);
     });
-};
+
 // Create chat bot
 var connector = new builder.ChatConnector({
     appId: config.skype_app_id,
@@ -57,4 +57,3 @@ bot.dialog('/', function (session) {
 });
 
 
-module.exports = exports;
