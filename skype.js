@@ -14,10 +14,11 @@ var exports = {};
 
 app.set('port',  (process.env.PORT || 5001));
 
-app.listen(app.get('port'), function() {
-        console.log('running on port', app.get('port'))
-})
-
+exports.listen = function () {
+    app.listen(app.get('port'), function() {
+            console.log('running on port', app.get('port'))
+    })
+};
 app.get('/', function (req, res) {
     res.send('Skype API twerks')
 })
@@ -69,3 +70,6 @@ bot.dialog('/', function (session) {
 /*
 
 */
+
+
+module.exports = exports;
