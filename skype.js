@@ -21,7 +21,6 @@ app.listen(app.get('port'), function() {
 app.get('/', function (req, res) {
     res.send('Skype API twerks')
 })
-/*
 // Create chat bot
 var connector = new builder.ChatConnector({
     appId: config.skype_app_id,
@@ -67,5 +66,6 @@ bot.dialog('/', function (session) {
       }
 });
 
+/*
 
 */
