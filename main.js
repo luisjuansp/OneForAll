@@ -1,5 +1,10 @@
 var facebook = require('./facebook.js');
+<<<<<<< HEAD
 var skype = require("./skype.js");
+=======
+var slack = require('./slack.js');
+
+>>>>>>> 395ac1a277e04a58e321e9100037aab8442ed742
 var exports = {};
 
 exports.sendMessage = function (metadata) {
@@ -49,6 +54,10 @@ exports.recieveGif = function (_){
 }
 
 exports.recieveVideo = function (_){
+	//virtual
+}
+
+exports.recieveFile = function (_){
 	//virtual
 }
 
