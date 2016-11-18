@@ -36,11 +36,13 @@ app.listen(app.get('port'), function() {
 })
 
 app.post('/webhook/', function (req, res) {
+
     let event = req.body.entry[0].messaging[i];
     let messaging_events = req.body.entry[0].messaging;
     let sender = event.sender.id;
 
     sendTextMessage(sender, messaging_events);
+
     /*
     for (let i = 0; i < messaging_events.length; i++) {
 
@@ -178,9 +180,10 @@ app.post("/send", function(req, res){
 
 app.get("/send", function(req, res){    
 
-    console.log(req);
-    res.send('GET')
     
+    res.send('GET')
+    var sender = "10157758880380472";
+    sendTextMessage(sender,sender);
     
 	//bot.postMessage("D25K85JSX", req);
 	
