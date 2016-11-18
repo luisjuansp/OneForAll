@@ -31,24 +31,3 @@ oneForAll.app.post('/oneForAll', function (req, res) {
 		break;
 	}
 });
-
-{action: "message",
-metadata:[{
-	service: "facebook",
-	data:{
-		id: "1234";
-		text: "text"
-	}
-}, {
-	service: "facebook",
-	data:{
-		id: "1234";
-		text: "text"
-	}
-}, {
-	service: "facebook",
-	data:{
-		id: "1234";
-		text: "text"
-	}
-}]}
