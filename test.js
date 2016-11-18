@@ -20,4 +20,35 @@ oneForAll.recieveVideo = function(message){
 	oneForAll.sendVideo(message);
 }
 
-oneForAll.listen();
+oneForAll.app.post('/oneForAll', function (req, res) {
+	switch(req.action){
+		case "message":
+			oneForAll.sendMessage(req.metadata);
+		break;
+		case "image":
+			oneForAll.sendImage(req.metadata);
+		default:
+		break;
+	}
+});
+
+{action: "message",
+metadata:[{
+	service: "facebook",
+	data:{
+		id: "1234";
+		text: "text"
+	}
+}, {
+	service: "facebook",
+	data:{
+		id: "1234";
+		text: "text"
+	}
+}, {
+	service: "facebook",
+	data:{
+		id: "1234";
+		text: "text"
+	}
+}]}

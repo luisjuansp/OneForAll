@@ -1,8 +1,11 @@
-var facebook = require('./facebook.js');
+var routes = require("./routes");
+var app = routes();
 
-var skype = require("./skype.js");
+var facebook = require('./facebook.js')(app);
+var skype = require("./skype.js")(app);
 
 //var slack = require('./slack.js');
+
 
 var exports = {};
 
@@ -95,9 +98,6 @@ facebook.recieveVideo = function (data){
 	exports.recieveVideo(metadata);
 }
 
-exports.listen = function () {
-	facebook.listen();
-	//skype.listen();
-}
+exports.app = app;
 
 module.exports = exports;
