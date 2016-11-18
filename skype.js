@@ -52,6 +52,7 @@ module.exports = function(app) {
     String.prototype.contains = function(content){
     return this.indexOf(content) !== -1;
     }
+    /*
     bot.dialog('/', function (session) {
         session.send(session.message.from);
         session.send(session.message.recipient);
@@ -64,7 +65,6 @@ module.exports = function(app) {
         }
     });
 
-    /*
 
     */
 
