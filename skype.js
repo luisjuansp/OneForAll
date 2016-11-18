@@ -52,8 +52,14 @@ module.exports = function(app) {
     String.prototype.contains = function(content){
     return this.indexOf(content) !== -1;
     }
-/*    bot.dialog('/', function (session) {
+    bot.dialog('/', function (session) {
+        session.send(1);
+        session.send(session);
+        session.send(2);
+        session.send(session.message);
+        session.send(3);
         session.send(session.message.from);
+        session.send(4);
         session.send(session.message.recipient);
         if(session.message.text.toLowerCase().contains('hello')){
         session.send(`Hey, How are you?`);
@@ -64,7 +70,7 @@ module.exports = function(app) {
         }
     });
 
-*/
+/*
 
     
     bot.dialog('/', [
@@ -101,7 +107,7 @@ module.exports = function(app) {
             }
             session.endDialogWithResult({ response: session.dialogData.profile });
         }
-    ]);
+    ]);*/
     
 
 
