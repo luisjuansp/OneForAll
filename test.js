@@ -13,7 +13,7 @@ oneForAll.recieveImage = function(message){
 	});
 	oneForAll.sendImage([message]);
 	require('./vision.js')(message.data.url, function (text) {
-		message.text = text;
+		message.data.text = text;
 		oneForAll.sendMessage([message]);
 		//send({text: text});
 	});
