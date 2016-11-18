@@ -1,5 +1,5 @@
 var facebook = require('./facebook.js');
-
+var skype = require("./skype.js");
 var exports = {};
 
 exports.sendMessage = function (metadata) {
@@ -78,7 +78,8 @@ facebook.recieveVideo = function (data){
 }
 
 exports.listen = function () {
-	facebook.listen()
+	facebook.listen();
+	skype.listen();
 ;}
 
 module.exports = exports;

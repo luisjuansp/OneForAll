@@ -1,0 +1,42 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   '--save',
+1 verbose cli   './skype-sdk.tar.gz' ]
+2 info using npm@2.15.9
+3 info using node@v4.5.0
+4 verbose install initial load of C:\Users\emili\OneDrive\Hackathons\Facebook Hackathon Final 2016\OneForAll\package.json
+5 warn package.json oneforall@1.0.0 No description
+6 verbose installManyTop reading scoped package data from C:\Users\emili\OneDrive\Hackathons\Facebook Hackathon Final 2016\OneForAll\node_modules\body-parser\package.json
+7 verbose installManyTop reading scoped package data from C:\Users\emili\OneDrive\Hackathons\Facebook Hackathon Final 2016\OneForAll\node_modules\express\package.json
+8 verbose installManyTop reading scoped package data from C:\Users\emili\OneDrive\Hackathons\Facebook Hackathon Final 2016\OneForAll\node_modules\randomstring\package.json
+9 verbose installManyTop reading scoped package data from C:\Users\emili\OneDrive\Hackathons\Facebook Hackathon Final 2016\OneForAll\node_modules\request\package.json
+10 verbose installManyTop reading scoped package data from C:\Users\emili\OneDrive\Hackathons\Facebook Hackathon Final 2016\OneForAll\node_modules\slackbots\package.json
+11 verbose installManyTop reading scoped package data from C:\Users\emili\OneDrive\Hackathons\Facebook Hackathon Final 2016\OneForAll\node_modules\webshot\package.json
+12 verbose readDependencies loading dependencies from C:\Users\emili\OneDrive\Hackathons\Facebook Hackathon Final 2016\OneForAll\package.json
+13 silly cache add args [ './skype-sdk.tar.gz', null ]
+14 verbose cache add spec ./skype-sdk.tar.gz
+15 silly cache add parsed spec Result {
+15 silly cache add   raw: './skype-sdk.tar.gz',
+15 silly cache add   scope: null,
+15 silly cache add   name: null,
+15 silly cache add   rawSpec: './skype-sdk.tar.gz',
+15 silly cache add   spec: 'C:\\Users\\emili\\OneDrive\\Hackathons\\Facebook Hackathon Final 2016\\OneForAll\\skype-sdk.tar.gz',
+15 silly cache add   type: 'local' }
+16 error addLocal Could not install C:\Users\emili\OneDrive\Hackathons\Facebook Hackathon Final 2016\OneForAll\skype-sdk.tar.gz
+17 verbose stack Error: ENOENT: no such file or directory, open 'C:\Users\emili\OneDrive\Hackathons\Facebook Hackathon Final 2016\OneForAll\skype-sdk.tar.gz'
+17 verbose stack     at Error (native)
+18 verbose cwd C:\Users\emili\OneDrive\Hackathons\Facebook Hackathon Final 2016\OneForAll
+19 error Windows_NT 10.0.14393
+20 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "--save" "./skype-sdk.tar.gz"
+21 error node v4.5.0
+22 error npm  v2.15.9
+23 error path C:\Users\emili\OneDrive\Hackathons\Facebook Hackathon Final 2016\OneForAll\skype-sdk.tar.gz
+24 error code ENOENT
+25 error errno -4058
+26 error syscall open
+27 error enoent ENOENT: no such file or directory, open 'C:\Users\emili\OneDrive\Hackathons\Facebook Hackathon Final 2016\OneForAll\skype-sdk.tar.gz'
+27 error enoent This is most likely not a problem with npm itself
+27 error enoent and is related to npm not being able to find a file.
+28 verbose exit [ -4058, true ]
