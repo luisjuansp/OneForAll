@@ -20,4 +20,3 @@ oneForAll.recieveVideo = function(message){
 	oneForAll.sendVideo(message);
 }
 
-oneForAll.listen();

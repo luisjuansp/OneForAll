@@ -3,11 +3,13 @@
 const request = require('request')
 var config = require('./config.json');
 var exports = {};
-
 const token = config.facebook_token; 
 
 
 module.exports = function(app) {
+    //console.log(app);
+    //console.log(app);
+    //console.log(app._router.stack);
     // Index route
     app.get('/', function (req, res) {
         res.send('Facebook API twerks')
@@ -175,12 +177,6 @@ module.exports = function(app) {
     });
 
 
-    exports.listen = function () {
-        // Spin up the server
-        app.listen(app.get('port'), function() {
-            console.log('running on port', app.get('port'))
-        })
-    };
 
     exports.recieveMessage = function (data) {
         //virtual
