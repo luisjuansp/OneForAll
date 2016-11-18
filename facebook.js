@@ -93,10 +93,10 @@ function receivedMessage(event) {
     
     messageAttachments.forEach(function(attachment) {
 
-        exports.recieveMessage({id: senderID, text: JSON.stringify(attachment.payload.url)});
+        //exports.recieveMessage({id: senderID, text: JSON.stringify(attachment.payload.url)});
+        exports.recieveImage({id : senderID, url : attachment.payload.url});
 
     });
-    //exports.recieveImage({id : senderID, url : messageAttachments.payload.url});
   }
 }
 
