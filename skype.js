@@ -1,6 +1,9 @@
+'use strict'
+
 var restify = require('restify');
 var builder = require('botbuilder');
 var config = require('./config.json');
+const express = require('express')
 const app = express()
 //=========================================================
 // Bot Setup
