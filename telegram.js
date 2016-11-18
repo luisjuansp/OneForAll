@@ -36,7 +36,7 @@ bot.on('message', function (msg) {
         var photo = msg.photo[0].file_id;
         var data = {id : chatId, photo : photo };
         //bot.sendPhoto(chatId, photo );
-        exports.recieveMessage(data);
+        exports.recieveImage(data);
   }
   else if (msg.video) {
         var video = msg.video.file_id;
