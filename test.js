@@ -32,11 +32,18 @@ oneForAll.app.post('/oneForAll', function (req, res) {
 	switch(req.action){
 		case "message":
 			oneForAll.sendMessage(req.metadata);
+			res.sendStatus(200);
 		break;
 		case "image":
 			oneForAll.sendImage(req.metadata);
+			res.sendStatus(200);
+			break;
+		case "detection":
+			require('vision.js')(req.url, function (text) {
+				res.send({text: text});
+			});
+			break;
 		default:
 		break;
 	}
-	res.sendStatus(200);
 });
