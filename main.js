@@ -8,6 +8,10 @@ exports.sendMessage = function (metadata) {
 	}
 }
 
+exports.sendImage = function (data) {
+	facebook.sendImage(data);
+}
+
 exports.recieveMessage = function (data){
 	//virtual
 }

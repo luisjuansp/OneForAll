@@ -110,32 +110,6 @@ exports.sendTextMessage = sendTextMessage;
 //     })
 // }
 
-function sendGenericMessage(sender, image) {
-	let messageData = {
-
-        "attachment": {
-			"type": "image",
-			"payload": {
-				"url"	: image,
-			}
-		}
-	}
-	request({
-		url: 'https://graph.facebook.com/v2.6/me/messages',
-		qs: {access_token:token},
-		method: 'POST',
-		json: {
-			recipient: {id:sender},
-			message: messageData,
-		}
-	}, function(error, response, body) {
-		if (error) {
-			console.log('Error sending messages: ', error)
-		} else if (response.body.error) {
-			console.log('Error: ', response.body.error)
-		}
-	})
-}
 
 app.post("/send", function(req, res){
 
@@ -212,6 +186,33 @@ exports.sendMessage = function (data) {
             console.log('Error: ', response.body.error)
         }
     })
+}
+
+exports.sendImage = function(data) {
+	let messageData = {
+
+        "attachment": {
+			"type": "image",
+			"payload": {
+				"url"	: data.image,
+			}
+		}
+	}
+	request({
+		url: 'https://graph.facebook.com/v2.6/me/messages',
+		qs: {access_token:token},
+		method: 'POST',
+		json: {
+			recipient: {id : data.id},
+			message: messageData,
+		}
+	}, function(error, response, body) {
+		if (error) {
+			console.log('Error sending messages: ', error)
+		} else if (response.body.error) {
+			console.log('Error: ', response.body.error)
+		}
+	})
 }
 
 module.exports = exports;
