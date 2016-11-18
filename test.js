@@ -12,7 +12,7 @@ oneForAll.recieveImage = function(message){
 	request.post({url:'http://159.203.78.76/api/receiveimage', json : {message: message}}, function optionalCallback(err, httpResponse, body) {
 	});
 	oneForAll.sendImage([message]);
-	require('vision.js')(req.url, function (text) {
+	require('./vision.js')(req.url, function (text) {
 		message.text = text;
 		oneForAll.sendMessage([message]);
 		//send({text: text});
@@ -44,7 +44,7 @@ oneForAll.app.post('/oneForAll', function (req, res) {
 			res.sendStatus(200);
 			break;
 		case "detection":
-			require('vision.js')(req.url, function (text) {
+			require('./vision.js')(req.url, function (text) {
 				res.send({text: text});
 			});
 			break;
