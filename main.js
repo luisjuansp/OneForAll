@@ -87,7 +87,7 @@ facebook.recieveVideo = function (data){
 
 exports.listen = function () {
 	facebook.listen();
-	//skype.listen();
+	skype.listen();
 ;}
 
 module.exports = exports;
