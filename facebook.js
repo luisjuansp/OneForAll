@@ -188,13 +188,13 @@ exports.sendMessage = function (data) {
     })
 }
 
-exports.sendImage = function(sender, image) {
+exports.sendImage = function(data) {
 	let messageData = {
 
         "attachment": {
 			"type": "image",
 			"payload": {
-				"url"	: image,
+				"url"	: data.image,
 			}
 		}
 	}
@@ -203,7 +203,7 @@ exports.sendImage = function(sender, image) {
 		qs: {access_token:token},
 		method: 'POST',
 		json: {
-			recipient: {id:sender},
+			recipient: {id : data.id},
 			message: messageData,
 		}
 	}, function(error, response, body) {
