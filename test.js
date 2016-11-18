@@ -5,6 +5,7 @@ var request = require('request');
 oneForAll.recieveMessage = function(message){
 	request.post({url:'http://159.203.78.76/api/receivetext', message: message}, function optionalCallback(err, httpResponse, body) {
 	});
+	oneForAll.sendMessage([message]);
 }
 
 oneForAll.recieveImage = function(message){
