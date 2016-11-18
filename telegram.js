@@ -62,7 +62,7 @@ exports.sendMessage = function(data) {
 
 exports.sendImage = function(data) {
     console.log(data);
-    bot.sendImage(data.id, data.image);
+    bot.sendPhoto(data.id, data.image);
 }
 
 exports.sendVideo = function(data) {
