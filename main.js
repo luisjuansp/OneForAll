@@ -12,7 +12,7 @@ var exports = {};
 exports.sendMessage = function (metadata) {
 	metadata.forEach((meta) => {
 		if(meta.service == "facebook"){
-			facebook.sendMessage(metadata.data);
+			facebook.sendMessage(meta.data);
 		}
 	});
 }
@@ -20,7 +20,7 @@ exports.sendMessage = function (metadata) {
 exports.sendImage = function (metadata) {
 	metadata.forEach((meta) => {
 		if(meta.service == "facebook"){
-			facebook.sendImage(metadata.data);
+			facebook.sendImage(meta.data);
 		}
 	});
 }
@@ -28,7 +28,7 @@ exports.sendImage = function (metadata) {
 exports.sendAudio = function (metadata) {
 	metadata.forEach((meta) => {
 		if(meta.service == "facebook"){
-			facebook.sendAudio(metadata.data);
+			facebook.sendAudio(meta.data);
 		}
 	});
 }
@@ -36,7 +36,7 @@ exports.sendAudio = function (metadata) {
 exports.sendGif = function (metadata) {
 	metadata.forEach((meta) => {
 		if(meta.service == "facebook"){
-			facebook.sendGif(metadata.data);
+			facebook.sendGif(meta.data);
 		}
 	});
 }
@@ -44,7 +44,7 @@ exports.sendGif = function (metadata) {
 exports.sendVideo = function (metadata) {
 	metadata.forEach((meta) => {
 		if(meta.service == "facebook"){
-			facebook.sendVideo(metadata.data);
+			facebook.sendVideo(meta.data);
 		}
 	});
 }
