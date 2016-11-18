@@ -28,6 +28,9 @@ module.exports = function(app) {
     //app.post('/skypehook', connector.listen());
     app.post('/skypehook',  function (req, res) {
     // Process posted notification
+        console.log(req);
+        bot.send(req);
+        /*
         var address = JSON.parse(req.body.address);
         var notification = req.body.notification;
 
@@ -40,6 +43,7 @@ module.exports = function(app) {
             res.status(err ? 500 : 200);
             res.end();
         });
+        */
     });
     bot.on('contactRelationUpdate', function (message) {
         if (message.action === 'add') {
