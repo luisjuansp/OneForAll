@@ -4,4 +4,4 @@ oneForAll.recieveMessage = function(data){
 	
 }
 
-// oneForAll.listen();
+oneForAll.listen();
