@@ -1,6 +1,7 @@
 var restify = require('restify');
 var builder = require('botbuilder');
 var config = require('./config.json');
+const app = express()
 //=========================================================
 // Bot Setup
 //=========================================================
@@ -9,17 +10,23 @@ var server = restify.createServer();
 var exports = {};
 
 
-    server.listen( 5001, function () {
-    console.log('%s listening to %s', server.name, server.url);
-    });
+app.listen(5001, function() {
+        console.log('running on port', app.get('port'))
+})
+
+app.get('/', function (req, res) {
+    res.send('Facebook API twerks')
+})
 
 // Create chat bot
 var connector = new builder.ChatConnector({
     appId: config.skype_app_id,
     appPassword: config.skype_password
 });
+
+
 var bot = new builder.UniversalBot(connector);
-server.post('/skypehook', connector.listen());
+app.post('/skypehook', connector.listen());
 //server.post('/api/messages', connector.listen());
 //Bot on
 bot.on('contactRelationUpdate', function (message) {
