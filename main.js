@@ -1,4 +1,5 @@
 var facebook = require('./facebook.js');
+var slack = require('./slack.js');
 
 var exports = {};
 
