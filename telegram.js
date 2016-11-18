@@ -44,8 +44,8 @@ bot.on('message', function (msg) {
         //bot.sendVideo(chatId, video);
         exports.recieveVideo(data);
   }
-  else if (msg.audio ){
-        var audio = msg.audio.file_id;
+  else if (msg.voice ){
+        var audio = msg.voice.file_id;
         var data = {id : chatId, audio : audio };
         //bot.sendAudio(chatId, audio);
         exports.recieveAudio(data);
@@ -62,19 +62,22 @@ exports.sendMessage = function(data) {
 
 exports.sendImage = function(data) {
     console.log(data);
-    bot.sendPhoto(data.id, data.photo);
+    bot.sendPhoto(data.id, data.image);
 }
 
 exports.sendVideo = function(data) {
+    console.log(data);
     bot.sendVideo(data.id, data.video);
 }
 
 exports.sendGif = function(data) {
+    console.log(data);
     bot.sendGif(data.id, data.image);
 }
 
 exports.sendAudio = function(data) {
-    bot.sendAudio(data.id, data.audio);
+    console.log(data);
+    bot.sendVoice(data.id, data.audio);
 }
 
 module.exports = exports;
