@@ -8,17 +8,19 @@ exports.sendMessage = function (metadata) {
 	}
 }
 
-exports.sendImage = function (data) {
-	facebook.sendImage(data);
+exports.sendImage = function (metadata) {
+	if(metadata.service == "facebook"){
+		facebook.sendImage(metadata.data);
+	}
 }
 
-exports.recieveMessage = function (data){
+exports.recieveMessage = function (_){
 	//virtual
 }
 
 facebook.recieveMessage = function (data){
 	var metadata = {service: "facebook", data: data};
-	exports.recieveMessage(data);
+	exports.recieveMessage(metadata);
 }
 
 exports.listen = function () {
