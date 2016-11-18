@@ -2,16 +2,20 @@ var facebook = require('./facebook.js');
 
 var exports = {};
 
-exports.recieveMessageAPI = function (data) {
-
+exports.sendMessage = function (data) {
+	facebook.sendMessage(data);
 }
 
 exports.recieveMessage = function (data){
+	//virtual
+}
 
+facebook.recieveMessage = function (data){
+	exports.recieveMessage(data);
 }
 
 exports.listen = function () {
-	facebook.listen();
-}
+	facebook.listen()
+;}
 
 module.exports = exports;

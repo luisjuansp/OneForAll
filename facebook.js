@@ -32,13 +32,6 @@ app.get('/webhook/', function (req, res) {
     }
 })
 
-exports.listen = function () {
-    // Spin up the server
-    app.listen(app.get('port'), function() {
-        console.log('running on port', app.get('port'))
-    })
-};
-
 app.post('/webhook/', function (req, res) {
 
     let messaging_events = req.body.entry[0].messaging;
@@ -50,7 +43,7 @@ app.post('/webhook/', function (req, res) {
         
         if (event.message && event.message.text) {
             let text = event.message.text
-            sendTextMessage(sender, text); 
+            exports.recieveMessage({id: sender, text: text}); 
         }
     	if (event.postback) {
             let text = JSON.stringify(event.postback)
@@ -80,6 +73,8 @@ function sendTextMessage(sender, text) {
         }
     })
 }
+
+exports.sendTextMessage = sendTextMessage;
 
 // function callApi(sender, text) {
 
@@ -187,5 +182,36 @@ app.get("/send", function(req, res){
 	//bot.postMessage("D25K85JSX", req);
 	
 });
+
+
+exports.listen = function () {
+    // Spin up the server
+    app.listen(app.get('port'), function() {
+        console.log('running on port', app.get('port'))
+    })
+};
+
+exports.recieveMessage = function (data) {
+    //virtual
+}
+
+exports.sendMessage = function (data) {
+    let messageData = { text:data.text }
+    request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:data.id},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+}
 
 module.exports = exports;
