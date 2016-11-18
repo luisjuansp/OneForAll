@@ -56,27 +56,27 @@ bot.on('message', function (msg) {
 });
 
 exports.sendMessage = function(data) {
-    console.log(data);
+    //console.log(data);
     bot.sendMessage(data.id, data.text);
 }
 
 exports.sendImage = function(data) {
-    console.log(data);
+    //console.log(data);
     bot.sendPhoto(data.id, data.image);
 }
 
 exports.sendVideo = function(data) {
-    console.log(data);
+    //console.log(data);
     bot.sendVideo(data.id, data.video);
 }
 
 exports.sendGif = function(data) {
-    console.log(data);
+    //console.log(data);
     bot.sendGif(data.id, data.image);
 }
 
 exports.sendAudio = function(data) {
-    console.log(data);
+    //console.log(data);
     bot.sendVoice(data.id, data.audio);
 }
 
