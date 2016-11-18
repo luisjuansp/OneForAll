@@ -65,14 +65,10 @@ module.exports = function(app) {
         }); 
     });
     bot.dialog('/', function (session) {
-        session.send("1");
-        session.send(session);
-        session.send("2");
-        session.send(session.message);
+        console.log("Test");
+        session.send(JSON.stringify(sessions));
         session.send("3");
-        session.send(session.message.from);
-        session.send("4");
-        session.send(session.message.recipient);
+        session.send(session.message);
         if(session.message.text.toLowerCase().contains('hello')){
         session.send(`Hey, How are you?`);
         }else if(session.message.text.toLowerCase().contains('help')){
@@ -81,7 +77,7 @@ module.exports = function(app) {
             session.send(`Sorry I don't understand you...`);
         }
 
-        session.beginDialog('/createSubscription', session);
+        
     });
 
 /*
