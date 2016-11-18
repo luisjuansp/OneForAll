@@ -34,7 +34,6 @@ exports.sendImage = function (metadata) {
 			slack.sendImage(meta.data);
 		}
 		else if ( meta.service == "telegram") {
-			
 			telegram.sendImage(meta.data);
 		}
 	});

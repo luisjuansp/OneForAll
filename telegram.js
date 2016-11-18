@@ -33,11 +33,7 @@ bot.on('message', function (msg) {
   else if ( msg.photo) {
         var photo = msg.photo[0].file_id;
         var data = {id : chatId, photo : photo };
-        //bot.sendPhoto(chatId, photo );
-        var url = bot.getFile(photo);
-        console.log("1");
-        console.log(url);
-        console.log("2");
+        //bot.sendPhoto(chatId, photo )
         exports.recieveImage(data);
   }
   else if (msg.video) {
