@@ -1,5 +1,8 @@
 var facebook = require('./facebook.js');
-var slack = require('./slack.js');
+
+var skype = require("./skype.js");
+
+//var slack = require('./slack.js');
 
 var exports = {};
 
@@ -83,7 +86,8 @@ facebook.recieveVideo = function (data){
 }
 
 exports.listen = function () {
-	facebook.listen()
+	facebook.listen();
+	skype.listen();
 ;}
 
 module.exports = exports;
