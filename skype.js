@@ -25,26 +25,8 @@ module.exports = function(app) {
 
 
     var bot = new builder.UniversalBot(connector);
-    //app.post('/skypehook', connector.listen());
-    app.post('/skypehook',  function (req, res) {
-    // Process posted notification
-        console.log(req);
-        bot.send(req);
-        /*
-        var address = JSON.parse(req.body.address);
-        var notification = req.body.notification;
-
-        // Send notification as a proactive message
-        var msg = new builder.Message()
-            .address(address)
-            .text(notification);
-        bot.send(msg, function (err) {
-            // Return success/failure
-            res.status(err ? 500 : 200);
-            res.end();
-        });
-        */
-    });
+    app.post('/skypehook', connector.listen());
+    
     bot.on('contactRelationUpdate', function (message) {
         if (message.action === 'add') {
             var name = message.user ? message.user.name : null;
@@ -98,6 +80,8 @@ module.exports = function(app) {
         }else{
             session.send(`Sorry I don't understand you...`);
         }
+
+        session.beginDialog('/createSubscription', session);
     });
 
 /*
