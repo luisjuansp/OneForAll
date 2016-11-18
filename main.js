@@ -15,11 +15,13 @@ var exports = {};
 
 exports.sendMessage = function (metadata) {
 	metadata.forEach((meta) => {
-		console.log(meta);
+		
 		if(meta.service == "facebook"){
 			facebook.sendMessage(meta.data);
 		} else if(meta.service == "slack"){
 			slack.sendMessage(meta.data);
+		} else if (meta.service == "telegram") {
+			telegram.sendMessage(meta.data);
 		}
 	});
 }
