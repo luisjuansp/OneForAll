@@ -53,7 +53,7 @@ module.exports = function(app) {
     return this.indexOf(content) !== -1;
     }
     bot.dialog('/', function (session) {
-        session.send(session.message);
+        session.send(session);
         if(session.message.text.toLowerCase().contains('hello')){
         session.send(`Hey, How are you?`);
         }else if(session.message.text.toLowerCase().contains('help')){
