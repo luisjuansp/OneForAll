@@ -55,7 +55,7 @@ module.exports = function(app) {
         // Serialize users address to a string.
         var address = JSON.stringify(session.message.address);
 
-        sessions.send(address);
+        session.send(address);
         // Save subscription with address to storage.
         session.sendTyping();
         createSubscription(args.userId, address, function (err) {
