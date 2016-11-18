@@ -9,7 +9,7 @@ var server = restify.createServer();
 var exports = {};
 
 exports.listen = function () {
-    server.listen(process.env.port || process.env.PORT || 8080, function () {
+    server.listen(process.env.port || process.env.PORT || 5001, function () {
     console.log('%s listening to %s', server.name, server.url);
     });
 };
