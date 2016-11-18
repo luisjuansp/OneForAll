@@ -4,10 +4,10 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
 const app = express()
-
+var config = require('./config.json');
 var exports = {};
 
-const token = "EAAS6Ppy5MfcBAEEuoEdWEAmLrVWtLtUKlCtBU9q2ZAA1KJaKf8LBeQY23yGTHY4tZBQfkDtlF3JYU06M1SWYYXiuW77qgCPOZA4ms3cZC7uH3dIBK5fK4tsSJveXcChMzEFTk3CmGE6mRSZAf7II13UBXdCqZBIpGtuSpEWyHDvAZDZD"
+const token = config.facebook_token; 
 
 
 app.set('port', (process.env.PORT || 5000))
@@ -25,7 +25,7 @@ app.get('/', function (req, res) {
 
 // for Facebook verification
 app.get('/webhook/', function (req, res) {
-    if (req.query['hub.verify_token'] === 'test_token') {
+    if (req.query['hub.verify_token'] === config.facebook_verify_token ) {
         res.send(req.query['hub.challenge'])
     } else {
         res.send('Error, wrong token')
