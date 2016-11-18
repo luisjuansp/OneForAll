@@ -39,6 +39,11 @@ facebook.recieveMessage = function (data){
 	exports.recieveMessage(metadata);
 }
 
+facebook.recieveImage = function (data){
+	var metadata = {service: "facebook", data: data};
+	exports.recieveImage(metadata);
+}
+
 exports.listen = function () {
 	facebook.listen()
 ;}

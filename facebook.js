@@ -91,16 +91,10 @@ function receivedMessage(event) {
     
   } else if (messageAttachments) {
 
-    sendTextMessage(senderID, "Message with attachment received");
+
+    exports.recieveImage({id : senderID, url : messageAttachments.payload.url});
   }
 }
-
-
-function sendTextMessage(sender, text) {
-    let messageData = { text:text }
-     callSendAPI(messageData);
-}
-
 
 function callSendAPI(messageData) {
   request({
@@ -128,40 +122,6 @@ function callSendAPI(messageData) {
 }
 
 exports.sendTextMessage = sendTextMessage;
-
-// function callApi(sender, text) {
-
-//     request({
-//         url: 'http://192.81.209.68/api/',
-//         method: 'POST',
-//         json: {
-//             text: text,
-//             facebook :  sender 
-//         }
-//     }, function(error, response, body) {
-//         // if (error) {
-//         //     console.log('Error sending messages: ', error)
-//         // // } else if (response.body.error) {
-//         //     // console.log('Error: ', response.body.error)
-//         // }
-
-        
-//         // var url = response.body.image;
-//         // var message = body.text;
-        
-//         // if (message ) sendTextMessage(sender, message ); 
-        
-//         // if (url) {
-            
-//         //     refreshGrid(sender,url, function(result) {
-
-//         //         console.log(result);
-//         //     });
-            
-//         // } 
-        
-//     })
-// }
 
 
 app.post("/send", function(req, res){
@@ -223,49 +183,24 @@ exports.recieveMessage = function (data) {
 }
 
 exports.sendMessage = function (data) {
-    let messageData = { text:data.text }
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
+    let messageData = {
             recipient: {id:data.id},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
+            message: { text:data.text },
+        };
+    callSendAPI(messageData);
 }
 
 exports.sendImage = function(data) {
-	let messageData = {
-
-        "attachment": {
-			"type": "image",
-			"payload": {
-				"url"	: data.image,
-			}
-		}
-	}
-	request({
-		url: 'https://graph.facebook.com/v2.6/me/messages',
-		qs: {access_token:token},
-		method: 'POST',
-		json: {
-			recipient: {id : data.id},
-			message: messageData,
-		}
-	}, function(error, response, body) {
-		if (error) {
-			console.log('Error sending messages: ', error)
-		} else if (response.body.error) {
-			console.log('Error: ', response.body.error)
-		}
-	})
+     let messageData = {
+            attachment: {
+                type: "image",
+                payload: {
+                    url	: data.url,
+                }
+            },
+            recipient: {id:data.id}            
+        };
+    callSendAPI(messageData);
 }
 
 module.exports = exports;
