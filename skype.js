@@ -41,7 +41,7 @@ module.exports = function(app) {
     });
     bot.on('typing', function (message) {
     // User is typing
-    console.log(message);
+    //console.log(message);
     });
     bot.on('deleteUserData', function (message) {
         // User asked to delete their data
@@ -52,7 +52,7 @@ module.exports = function(app) {
     String.prototype.contains = function(content){
     return this.indexOf(content) !== -1;
     }
-    bot.dialog('/', function (session) {
+/*    bot.dialog('/', function (session) {
         session.send(session.message.from);
         session.send(session.message.recipient);
         if(session.message.text.toLowerCase().contains('hello')){
@@ -64,9 +64,9 @@ module.exports = function(app) {
         }
     });
 
+*/
 
-
-    /*
+    
     bot.dialog('/', [
         function (session) {
             session.beginDialog('/ensureProfile', session.userData.profile);
@@ -102,7 +102,7 @@ module.exports = function(app) {
             session.endDialogWithResult({ response: session.dialogData.profile });
         }
     ]);
-    */
+    
 
 
 //module.exports = exports;
