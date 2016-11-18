@@ -4,7 +4,7 @@ var app = routes();
 var facebook = require('./facebook.js')(app);
 var skype = require("./skype.js")(app);
 
-//var slack = require('./slack.js');
+var slack = require('./slack.js');
 
 
 var exports = {};
