@@ -10,7 +10,7 @@ var bot = new SlackBot({
 bot.on('start', function() {
 	//bot.postMessageToChannel('general', 'meow!');
 	//bot.postMessageToUser('user_name', 'meow!');
-	//bot.postMessageToUser('user_name', 'meow!');
+	bot.postMessageToUser('lowes', 'meow!');
 	//bot.postMessageToGroup('private_group', 'meow!');
 });
 
