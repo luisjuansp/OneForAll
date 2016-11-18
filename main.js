@@ -2,8 +2,13 @@ var routes = require("./routes");
 var app = routes();
 
 var facebook = require('./facebook.js')(app);
-var skype = require("./skype.js")(app);
+var telegram = require('./telegram.js');
 var slack = require('./slack.js');
+//var skype = require("./skype.js")(app);
+
+//var slack = require('./slack.js');
+
+
 
 
 var exports = {};
@@ -25,6 +30,9 @@ exports.sendImage = function (metadata) {
 		} else if(meta.service == "slack"){
 			slack.sendImage(meta.data);
 		}
+		else if ( meta.service == "telegram") {
+			telegram.sendImage(meta.data);
+		}
 	});
 }
 
@@ -34,6 +42,9 @@ exports.sendAudio = function (metadata) {
 			facebook.sendAudio(meta.data);
 		} else if(meta.service == "slack"){
 			slack.sendAudio(meta.data);
+		}
+		else if ( meta.service == "telegram") {
+			telegram.sendAudio(meta.data);
 		}
 	});
 }
@@ -45,6 +56,9 @@ exports.sendGif = function (metadata) {
 		} else if(meta.service == "slack"){
 			slack.sendGif(meta.data);
 		}
+		else if ( meta.service == "telegram") {
+			telegram.sendGif(meta.data);
+		}
 	});
 }
 
@@ -54,6 +68,9 @@ exports.sendVideo = function (metadata) {
 			facebook.sendVideo(meta.data);
 		} else if(meta.service == "slack"){
 			slack.sendVideo(meta.data);
+		}
+		else if ( meta.service == "telegram") {
+			telegram.sendVideo(meta.data);
 		}
 	});
 }
@@ -105,6 +122,31 @@ facebook.recieveGif = function (data){
 facebook.recieveVideo = function (data){
 	var metadata = {service: "facebook", data: data};
 	exports.recieveVideo(metadata);
+}
+
+
+telegram.recieveMessage = function (data){
+	var metadata = {service: "telegram", data: data};
+	exports.recieveMessage(metadata);
+}
+
+telegram.recieveImage = function (data){
+	var metadata = {service: "telegram", data: data};
+	exports.recieveImage(metadata);
+}
+
+telegram.recieveAudio = function (data){
+	var metadata = {service: "telegram", data: data};
+	exports.recieveAudio(metadata);
+}
+
+telegram.recieveGif = function (data){
+	var metadata = {service: "telegram", data: data};
+	exports.recieveGif(metadata);
+}
+
+telegram.recieveVideo = function (data){
+	var metadata = {service: "telegram", data: data};
 }
 
 slack.recieveMessage = function (data){

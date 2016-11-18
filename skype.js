@@ -65,8 +65,7 @@ module.exports = function(app) {
         }); 
     });
     bot.dialog('/', function (session) {
-        console.log("Test");
-        session.send(JSON.stringify(session));
+
         session.send("3");
         session.send(session.message);
         if(session.message.text.toLowerCase().contains('hello')){
