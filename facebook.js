@@ -121,8 +121,6 @@ function callSendAPI(messageData) {
   });  
 }
 
-exports.sendTextMessage = sendTextMessage;
-
 
 app.post("/send", function(req, res){
 
