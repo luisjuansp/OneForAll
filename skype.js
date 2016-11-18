@@ -12,8 +12,9 @@ const app = express()
 var server = restify.createServer();
 var exports = {};
 
+app.set('port',  5001);
 
-app.listen(5001, function() {
+app.listen(app.get('port'), function() {
         console.log('running on port', app.get('port'))
 })
 
